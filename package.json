@@ -4,6 +4,7 @@
   "description": "product",
   "main": "index.js",
   "scripts": {
+    "somethign" : "npm install",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "us",
