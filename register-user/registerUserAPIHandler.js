@@ -6,4 +6,4 @@ router.get("/", parser.array(), (req, res) => {
     res.json({message: "I'm working!"})
 })
 
-module.exports = router
+export default router
