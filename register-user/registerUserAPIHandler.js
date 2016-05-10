@@ -1,4 +1,4 @@
-import {routerFactory, parser} from "./../core/APIRoutingService"
+import {routerFactory, parser} from "./../shared/services/APIRoutingService"
 
 let router = routerFactory()
 

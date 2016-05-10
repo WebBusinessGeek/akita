@@ -2,4 +2,4 @@
 require("babel-register")
 
 /*bootstrap api*/
-require("./core/app")
+require("./core/bootstrap")
