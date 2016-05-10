@@ -4,7 +4,7 @@
   "description": "product",
   "main": "index.js",
   "scripts": {
-    "somethign": "npm install",
+    "dev-client" : "node_modules/.bin/webpack-dev-server --config webpack.development.config.js --devtool eval --progress --colors --hot --content-base ./build",
     "test": "node_modules/.bin/nodemon node_modules/.bin/mocha --compilers js:babel-core/register --watch ./../hatched/"
   },
   "author": "us",

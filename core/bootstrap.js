@@ -10,6 +10,6 @@ APP.get("/", (req, res) => {
 
 
 /* setup the api to listen on set PORT */
-const PORT = "8080"
+const PORT = 9090
 APP.listen(PORT)
 console.log("server listening on port:", PORT)
