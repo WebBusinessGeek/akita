@@ -4,5 +4,4 @@ import routes from "./uiRoutes"
 import {Router} from "react-router"
 
 
-
 ReactDOM.render(<Router>{routes}</Router>, document.getElementById("render"))
