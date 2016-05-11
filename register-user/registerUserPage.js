@@ -1,5 +1,6 @@
 import React from "react"
 import BasePage from "./../shared/extendables/BasePage"
+import {REGISTER_USER_ENDPOINT} from "./../shared/constants/apiEndpoints"
 
 export default class RegisterUserPage extends BasePage {
     constructor() {
@@ -16,7 +17,7 @@ export default class RegisterUserPage extends BasePage {
         }
 
         let Request = this.newHTTPRequest(successCB, errorCB)
-        Request.getRequest("/api/register-user")
+        Request.getRequest(REGISTER_USER_ENDPOINT)
     }
 
     render() {
