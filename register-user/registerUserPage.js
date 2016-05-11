@@ -1,7 +1,9 @@
+require("./registerUserStyling.scss")
 import React from "react"
 import BasePage from "./../shared/extendables/BasePage"
 import {REGISTER_USER_ENDPOINT} from "./../shared/constants/apiEndpoints"
 import {Link} from "react-router"
+
 
 export default class RegisterUserPage extends BasePage {
     constructor() {

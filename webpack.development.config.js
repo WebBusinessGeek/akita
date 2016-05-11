@@ -20,14 +20,22 @@ module.exports = {
             {
                 test: /\.js?$/,
                 include: [
-                    Root + "/core/",
-                    Root + "/register-user/",
                     Root + "/",
                 ],
                 exclude: [
                     node_modules_dir,
                 ],
                 loader: "babel-loader"
+            },
+            {
+                test: /\.scss$/,
+                include: [
+                    Root + "/",
+                ],
+                exclude: [
+                    node_modules_dir,
+                ],
+                loader: "style!css!sass-loader!"
             },
         ]
     }
