@@ -2,14 +2,15 @@
 require("./apiRoutes")
 
 import APP from "./app"
+import {BUILD_DIRECTORY} from "./../shared/constants/directory"
+import {API_PORT, SERVER_LISTENING_MSG} from "./../shared/constants/transport"
 
 /* render the index.html file on GET / */
 APP.get("/", (req, res) => {
-    res.sendFile("./build/index.html")
+    res.sendFile(BUILD_DIRECTORY + "/index.html")
 })
 
-
-/* setup the api to listen on set PORT */
-const PORT = 9090
+/* setup the api to listen on correct PORT */
+const PORT = API_PORT
 APP.listen(PORT)
-console.log("server listening on port:", PORT)
+console.log(SERVER_LISTENING_MSG, PORT)
