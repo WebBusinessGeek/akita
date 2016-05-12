@@ -1,5 +1,43 @@
-#register-user-form {
-  background: red;
-  height: 500px;
-  width: 500px;
+body {
+  background: yellow;
+  z-index: 1;
 }
+
+#render {
+  background: red;
+  position: absolute;
+  left: 50%;
+  margin-left: -50%;
+  height: 100%;
+  width: 100%;
+  z-index: 5;
+}
+
+#render {
+  background: #32486F; /* For browsers that do not support gradients */
+  background: -webkit-linear-gradient(left top, #32486F, #56A17F); /* For Safari 5.1 to 6.0 */
+  background: -o-linear-gradient(bottom right, #32486F, #56A17F); /* For Opera 11.1 to 12.0 */
+  background: -moz-linear-gradient(bottom right, #32486F, #56A17F); /* For Firefox 3.6 to 15 */
+  background: linear-gradient(to bottom right, #32486F, #56A17F); /* Standard syntax */
+}
+
+#register-user-form-container {
+  background: #FFFFFF;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  border: 1px solid #F1F4F6;
+  width: 500px;
+  height: 600px;
+  margin-top: -300px;
+  margin-left: -250px;
+}
+
+
+.register-user-form-inputs {
+  margin-left: auto;
+  margin-right: auto;
+  width: 450px;
+  height: 50px;
+}
+

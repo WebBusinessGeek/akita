@@ -26,19 +26,20 @@ export default class RegisterUserPage extends BasePage {
     render() {
         return(
             <div id="register-user-form-container">
-                <p id="register-user-form-blurb">Create your account</p>
-                <form id="register-user-form">
+                <form id="register-user-form" className="text-center">
+                    <h2 id="register-user-form-heading">Hello!</h2>
+                    <p id="register-user-form-blurb">Create your account below.</p>
                     <div id="register-user-form-email-group" className="form-group">
-                        <label htmlFor="emailInput">Email</label>
-                        <input type="email" className="form-control" id="emailInput" placeholder="" />
+                        <label htmlFor="emailInput"></label>
+                        <input type="email" className="form-control register-user-form-inputs" id="emailInput" placeholder="Email" />
                     </div>
                     <div id="register-user-form-password-group" className="form-group">
-                        <label htmlFor="passwordInput">Password</label>
-                        <input type="password" className="form-control" id="passwordInput" placeholder="" />
+                        <label htmlFor="passwordInput"></label>
+                        <input type="password" className="form-control register-user-form-inputs" id="passwordInput" placeholder="Password" />
                     </div>
                     <div id="register-user-form-confirm-password-group" className="form-group">
-                        <label htmlFor="confirmPasswordInput">Confirm Password</label>
-                        <input type="password" className="form-control" id="confirmPasswordInput" placeholder="" />
+                        <label htmlFor="confirmPasswordInput"></label>
+                        <input type="password" className="form-control register-user-form-inputs" id="confirmPasswordInput" placeholder="Confirm It" />
                     </div>
                     <button className="btn btn-lg btn-primary" onClick={this.check}>Click</button>
                 </form>
