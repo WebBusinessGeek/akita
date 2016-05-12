@@ -27,8 +27,8 @@ export default class RegisterUserPage extends BasePage {
         return(
             <div id="register-user-form-container">
                 <form id="register-user-form" className="text-center">
-                    <h2 id="register-user-form-heading">Hello!</h2>
-                    <p id="register-user-form-blurb">Create your account below.</p>
+                    <h2 id="register-user-form-heading" className="boldText">Hello!</h2>
+                    <p id="register-user-form-blurb" className="greyText">Create your account below.</p>
                     <div id="register-user-form-email-group" className="form-group">
                         <label htmlFor="emailInput"></label>
                         <input type="email" className="form-control register-user-form-inputs" id="emailInput" placeholder="Email" />
@@ -41,9 +41,11 @@ export default class RegisterUserPage extends BasePage {
                         <label htmlFor="confirmPasswordInput"></label>
                         <input type="password" className="form-control register-user-form-inputs" id="confirmPasswordInput" placeholder="Confirm It" />
                     </div>
-                    <button id="createAccountBtn" className="btn btn-lg btn-primary greenBtn" onClick={this.check}>Create Account</button>
+                    <button id="createAccountBtn" className="btn btn-lg btn-primary pinkBtn" onClick={this.check}>Create Account</button>
                 </form>
-                <p>Already have an account? <Link to={`/login`}><button id="log_in_link_btn" className="btn btn-default pinkBtn">Log In</button></Link></p>
+                <div id="log-in-button-container">
+                    <p>Already have an account? <Link to={`/login`}><button id="log_in_link_btn" className="btn btn-default greenBtn">Log In</button></Link></p>
+                </div>
             </div>
         )
     }
