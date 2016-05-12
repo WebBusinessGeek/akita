@@ -1,0 +1,20 @@
+body {
+  z-index: 1;
+}
+
+#render {
+  position: absolute;
+  left: 50%;
+  margin-left: -50%;
+  height: 100%;
+  width: 100%;
+  z-index: 5;
+}
+
+.primaryBtn{
+  background: #5CD3B4;
+  border: 1px solid #5CD3B4;
+}
+
+$primaryBlue: #3A4150;
+$primaryGreen: #56A17F;

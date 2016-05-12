@@ -1,24 +1,11 @@
-body {
-  background: yellow;
-  z-index: 1;
-}
+@import "./../core/baseStyling.scss";
 
 #render {
-  background: red;
-  position: absolute;
-  left: 50%;
-  margin-left: -50%;
-  height: 100%;
-  width: 100%;
-  z-index: 5;
-}
-
-#render {
-  background: #32486F; /* For browsers that do not support gradients */
-  background: -webkit-linear-gradient(left top, #32486F, #56A17F); /* For Safari 5.1 to 6.0 */
-  background: -o-linear-gradient(bottom right, #32486F, #56A17F); /* For Opera 11.1 to 12.0 */
-  background: -moz-linear-gradient(bottom right, #32486F, #56A17F); /* For Firefox 3.6 to 15 */
-  background: linear-gradient(to bottom right, #32486F, #56A17F); /* Standard syntax */
+  background: $primaryGreen; /* For browsers that do not support gradients */
+  background: -webkit-linear-gradient(left top, $primaryGreen, $primaryBlue); /* For Safari 5.1 to 6.0 */
+  background: -o-linear-gradient(bottom right, $primaryGreen, $primaryBlue); /* For Opera 11.1 to 12.0 */
+  background: -moz-linear-gradient(bottom right, $primaryGreen, $primaryBlue); /* For Firefox 3.6 to 15 */
+  background: linear-gradient(to bottom right, $primaryGreen, $primaryBlue); /* Standard syntax */
 }
 
 #register-user-form-container {
@@ -33,11 +20,12 @@ body {
   margin-left: -250px;
 }
 
-
 .register-user-form-inputs {
   margin-left: auto;
   margin-right: auto;
   width: 450px;
   height: 50px;
 }
+
+
 
