@@ -3,11 +3,34 @@
 $primaryBlue: #3A4150;
 $primaryGreen: #56A17F;
 $buttonGreen: #5CD3B4;
+$buttonGreenBorder: #3ABD9C;
 $buttonPink: #FA565A;
+$buttonPinkBorder: #E53035;
 
 body {
   z-index: 1;
   font-family: "Open Sans", sans-serif;
+}
+
+input[type=password] {
+  color: $buttonGreen;
+  font-size: 20px;
+}
+
+input[type=email] {
+  font-size: 15px;
+}
+
+input[type=password]::-webkit-input-placeholder {
+  font-size: 15px;
+}
+
+input[type=password]::-moz-placeholder {
+  font-size: 15px;
+}
+
+input[type=password]::-moz-placeholder {
+  font-size: 15px;
 }
 
 #render {
@@ -22,15 +45,16 @@ body {
 .btn {
   border-radius: 0px;
   color: #fff;
+  font-size: 14px;
 }
 
 .greenBtn {
-  border: 1px solid $buttonGreen;
+  border: 2px solid $buttonGreenBorder;
   background: $buttonGreen;
 }
 
 .pinkBtn {
-  border: 1px solid $buttonPink;
+  border: 1px solid $buttonPinkBorder;
   background: $buttonPink;
 }
 

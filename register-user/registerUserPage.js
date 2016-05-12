@@ -41,7 +41,7 @@ export default class RegisterUserPage extends BasePage {
                         <label htmlFor="confirmPasswordInput"></label>
                         <input type="password" className="form-control register-user-form-inputs" id="confirmPasswordInput" placeholder="Confirm It" />
                     </div>
-                    <button id="submit" className="btn btn-lg btn-primary greenBtn" onClick={this.check}>Create Account</button>
+                    <button id="createAccountBtn" className="btn btn-lg btn-primary greenBtn" onClick={this.check}>Create Account</button>
                 </form>
                 <p>Already have an account? <Link to={`/login`}><button id="log_in_link_btn" className="btn btn-default pinkBtn">Log In</button></Link></p>
             </div>
