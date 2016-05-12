@@ -1,11 +1,7 @@
 @import "./../core/baseStyling.scss";
 
 #render {
-  background: $primaryGreen; /* For browsers that do not support gradients */
-  background: -webkit-linear-gradient(bottom, $primaryGreen, $primaryBlue); /* For Safari 5.1 to 6.0 */
-  background: -o-linear-gradient(bottom, $primaryGreen, $primaryBlue); /* For Opera 11.1 to 12.0 */
-  background: -moz-linear-gradient(bottom, $primaryGreen, $primaryBlue); /* For Firefox 3.6 to 15 */
-  background: linear-gradient(top, $primaryGreen, $primaryBlue); /* Standard syntax */
+  background: $primaryBlue; /* For browsers that do not support gradients */
 }
 
 #register-user-form-container {
@@ -13,36 +9,59 @@
   position: absolute;
   top: 50%;
   left: 50%;
-  border: 1px solid #F1F4F6;
-  width: 500px;
-  height: 600px;
+  border: 1px solid #CCCCCC;
+  width: 450px;
+  height: 560px;
   margin-top: -300px;
   margin-left: -250px;
+  padding: 20px;
 }
 
 .register-user-form-inputs {
   margin-left: auto;
   margin-right: auto;
-  width: 450px;
+  width: 400px;
   height: 50px;
   border-radius: 0px;
+  margin-bottom: -5px;
 }
 
 .register-user-form-inputs:focus {
   border: 1px solid $buttonGreenBorder;
 }
 
+#terms-conditions-container {
+  position: relative;
+  top: 15px;
+}
+
+#terms-conditions-link {
+  color: $primaryBlue;
+  text-decoration: underline;
+}
+
 #createAccountBtn {
+  position: relative;
+  top: 30px;
   width: 400px;
   height: 45px;
 }
 
 #log-in-button-container {
   position: relative;
-  top: 8%;
-  width: 50%;
+  top: 11%;
+  width: 308px;
   margin-left: auto;
   margin-right: auto;
+}
+
+#log-in-button-container p {
+  font-weight: 700;
+}
+
+#log-in-btn-link {
+  width: 120px;
+  margin-left: 5px;
 }
 
 
