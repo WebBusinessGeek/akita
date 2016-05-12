@@ -1,5 +1,13 @@
+@import url(https://fonts.googleapis.com/css?family=Open+Sans:400,700);
+
+$primaryBlue: #3A4150;
+$primaryGreen: #56A17F;
+$buttonGreen: #5CD3B4;
+$buttonPink: #FA565A;
+
 body {
   z-index: 1;
+  font-family: "Open Sans", sans-serif;
 }
 
 #render {
@@ -11,10 +19,19 @@ body {
   z-index: 5;
 }
 
-.primaryBtn{
-  background: #5CD3B4;
-  border: 1px solid #5CD3B4;
+.btn {
+  border-radius: 0px;
+  color: #fff;
 }
 
-$primaryBlue: #3A4150;
-$primaryGreen: #56A17F;
+.greenBtn {
+  border: 1px solid $buttonGreen;
+  background: $buttonGreen;
+}
+
+.pinkBtn {
+  border: 1px solid $buttonPink;
+  background: $buttonPink;
+}
+
+
