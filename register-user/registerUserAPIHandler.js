@@ -3,8 +3,9 @@ import {successResponse, errorResponse, failResponse} from "./../shared/services
 
 let router = newRouter()
 
-router.get("/", parser.array(), (req, res) => {
-    res.json(successResponse("yo"))
+router.post("/", parser.array(), (req, res) => {
+    let email = req.body.email
+    res.json(successResponse(email))
 })
 
 export default router

@@ -3,6 +3,7 @@ import Root from "./../rootdirectory"
 import cors from "cors"
 import {BUILD_DIRECTORY} from "./../shared/constants/directory"
 import {LOCAL_ADDR} from "./../shared/constants/transport"
+import bodyParser from "body-parser"
 
 /*instantiate the express app*/
 const APP = express()
@@ -13,6 +14,10 @@ let corsOptions = {
     credentials: true
 }
 APP.use(cors(corsOptions))
+
+/*set up body-parsing*/
+APP.use(bodyParser.json())
+APP.use(bodyParser.urlencoded({extended: true}))
 
 /*set static directory*/
 APP.use(express.static(BUILD_DIRECTORY))
