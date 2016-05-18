@@ -88,10 +88,10 @@ export default class RegisterUserPage extends BasePage {
                             <input type="checkbox"/> I agree to the <a id="terms-conditions-link" href="#" target="_blank">Terms and Conditions</a>
                         </label>
                     </div>
-                    <button id="createAccountBtn" className="btn btn-lg btn-primary pinkBtn" onClick={this.handleSubmit}>Create Account</button>
+                    <button id="createAccountBtn" className="btn btn-lg pinkBtn" onClick={this.handleSubmit}>Create Account</button>
                 </form>
                 <div id="log-in-button-container">
-                    <p>Already have an account? <Link to={`/login`}><button id="log-in-btn-link" className="btn btn-default greenBtn">Log In</button></Link></p>
+                    <p>Already have an account? <Link to={`/login`}><button id="log-in-btn-link" className="btn greenBtn">Log In</button></Link></p>
                 </div>
             </div>
         )

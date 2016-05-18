@@ -69,14 +69,15 @@ input[type=password]::-moz-placeholder {
 }
 
 .pinkBtn {
-  border: 1px solid $buttonPinkBorder;
+  border: 2px solid $buttonPinkBorder;
   background: $buttonPink;
 }
 
-.pinkBtn:hover {
-  border: 1px solid $buttonPinkBorder;
+.pinkBtn:hover, .pinkBtn:active, .pinkBtn:visited {
+  border: 2px solid $buttonPinkBorder;
   background: $buttonPinkBorder;
 }
+
 
 .boldText {
   font-weight: 700;
