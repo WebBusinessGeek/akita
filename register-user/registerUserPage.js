@@ -4,13 +4,18 @@ import ReactDOM from "react-dom"
 import BasePage from "./../shared/extendables/BasePage"
 import {REGISTER_USER_ENDPOINT} from "./../shared/constants/apiEndpoints"
 import {Link} from "react-router"
+import {MISMATCH_PASSWORD_ERROR} from "./../shared/constants/notifications"
 
 
 export default class RegisterUserPage extends BasePage {
     constructor() {
         super()
         this.handleSubmit = this.handleSubmit.bind(this)
+        this.state = {
+            errorMessage : null
+        }
     }
+
     handleSubmit(e) {
 
         e.preventDefault()
@@ -19,6 +24,17 @@ export default class RegisterUserPage extends BasePage {
         let password = ReactDOM.findDOMNode(this.refs.passwordInput).value.trim()
         let conf_password = ReactDOM.findDOMNode(this.refs.conf_passwordInput).value.trim()
 
+        return (password != conf_password) ?
+            this.throwMismatchPasswordError() : this.sendRegistrationRequest(email, password)
+    }
+
+    throwMismatchPasswordError() {
+        this.setState({
+            errorMessage : MISMATCH_PASSWORD_ERROR
+        })
+    }
+
+    sendRegistrationRequest(email, password) {
         let successCB = (response) => {
             console.log(response)
         }
@@ -28,15 +44,24 @@ export default class RegisterUserPage extends BasePage {
         }
 
         let Request = this.newHTTPRequest(successCB, errorCB)
-        Request.postRequest(REGISTER_USER_ENDPOINT, {email: email, password: password, conf_password: conf_password})
+        Request.postRequest(REGISTER_USER_ENDPOINT, {email: email, password: password})
+    }
+
+    renderErrorMessage() {
+        return(
+            <div>
+                <p className="error-text">{this.state.errorMessage}</p>
+            </div>
+        )
     }
 
     render() {
         return(
             <div id="register-user-form-container">
                 <form id="register-user-form" className="text-center">
-                    <h2 id="register-user-form-heading" className="boldText">hatched</h2>
+                    <h2 id="register-user-form-heading" className="boldText">Hatch</h2>
                     <p id="register-user-form-blurb" className="greyText">Create your account below.</p>
+                    <div>{this.state.errorMessage != null ? this.renderErrorMessage() : false }</div>
                     <div id="register-user-form-email-group" className="form-group">
                         <label htmlFor="emailInput"></label>
                         <input type="email" className="form-control register-user-form-inputs" ref="emailInput" id="emailInput" placeholder="Email" />
