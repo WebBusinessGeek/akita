@@ -4,8 +4,8 @@ import ReactDOM from "react-dom"
 import BasePage from "./../shared/extendables/BasePage"
 import {REGISTER_USER_ENDPOINT} from "./../shared/constants/apiEndpoints"
 import {Link} from "react-router"
-import {MISMATCH_PASSWORD_ERROR} from "./../shared/constants/notifications"
-
+import {MISMATCH_PASSWORD_ERROR, INCOMPLETE_FORM_ERROR, INVALID_EMAIL_FORMAT_ERROR} from "./../shared/constants/notifications"
+import validator from "validator"
 
 export default class RegisterUserPage extends BasePage {
     constructor() {
@@ -17,6 +17,9 @@ export default class RegisterUserPage extends BasePage {
     }
 
     handleSubmit(e) {
+        this.setState({
+            errorMessage : null
+        })
 
         e.preventDefault()
 
@@ -24,13 +27,19 @@ export default class RegisterUserPage extends BasePage {
         let password = ReactDOM.findDOMNode(this.refs.passwordInput).value.trim()
         let conf_password = ReactDOM.findDOMNode(this.refs.conf_passwordInput).value.trim()
 
+        if(!email || !password || !conf_password) {
+            return this.throwError(INCOMPLETE_FORM_ERROR)
+        }
+        if(!validator.isEmail(email)) {
+            return this.throwError(INVALID_EMAIL_FORMAT_ERROR)
+        }
         return (password != conf_password) ?
-            this.throwMismatchPasswordError() : this.sendRegistrationRequest(email, password)
+            this.throwError(MISMATCH_PASSWORD_ERROR) : this.sendRegistrationRequest(email, password)
     }
 
-    throwMismatchPasswordError() {
+    throwError(error) {
         this.setState({
-            errorMessage : MISMATCH_PASSWORD_ERROR
+            errorMessage : error
         })
     }
 

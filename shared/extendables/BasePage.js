@@ -10,4 +10,5 @@ export default class BasePage extends React.Component {
     newHTTPRequest(successCB, errorCB) {
         return new ClientHTTPRequestService(successCB, errorCB)
     }
+    
 }

@@ -63,6 +63,11 @@ input[type=password]::-moz-placeholder {
   background: $buttonGreenBorder;
 }
 
+.greenBtn:active {
+  border: 2px solid $buttonGreenBorder;
+  background: $buttonGreenBorder;
+}
+
 .pinkBtn {
   border: 1px solid $buttonPinkBorder;
   background: $buttonPink;
