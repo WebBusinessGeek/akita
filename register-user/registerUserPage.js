@@ -17,9 +17,7 @@ export default class RegisterUserPage extends BasePage {
     }
 
     handleSubmit(e) {
-        this.setState({
-            errorMessage : null
-        })
+        this.setState({errorMessage : null})
 
         e.preventDefault()
 
@@ -38,9 +36,7 @@ export default class RegisterUserPage extends BasePage {
     }
 
     throwError(error) {
-        this.setState({
-            errorMessage : error
-        })
+        this.setState({errorMessage : error})
     }
 
     sendRegistrationRequest(email, password) {

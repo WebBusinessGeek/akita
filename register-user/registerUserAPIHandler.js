@@ -1,16 +1,19 @@
 import {newRouter, parser} from "./../shared/services/APIRoutingService"
 import {successResponse, errorResponse, failResponse} from "./../shared/services/APIResponseService"
+import {MISSING_EMAIL_ERROR, MISSING_PASSWORD_ERROR} from "./../shared/constants/notifications"
 
 let router = newRouter()
 
 router.post("/", parser.array(), (req, res) => {
     let email = req.body.email
     let password = req.body.password
-    
 
-    /*if password and conf password don't match error*/
-
-    /*if error getting user from database 500 error*/
+    if(!email) {
+        return res.json(failResponse(MISSING_EMAIL_ERROR))
+    }
+    if(!password) {
+        return res.json(failResponse(MISSING_PASSWORD_ERROR))
+    }
 
     /*if user already in database error*/
 
