@@ -16,6 +16,12 @@ let User = connection.define("Users", {
     },
     bully: {
         type: Sequelize.BOOLEAN
+    },
+    mentality: {
+        type: Sequelize.STRING
+    },
+    happiness: {
+        type: Sequelize.STRING
     }
 })
 
