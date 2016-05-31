@@ -1,8 +1,14 @@
-const ROOT_PATH = "/api"
+import {isProductionEnv} from "./../../environment"
 
+let getHost = () => {
+    return (isProductionEnv() ? "PRODUCTION_SERVER" : "http://localhost:9090")
+}
 
-export const REGISTER_USER_ENDPOINT = ROOT_PATH + "/register-user"
+const ROOT_API_ENDPOINT = getHost()
+const REGISTER_USER_ENDPOINT = "/api/register-user"
+
 
 module.exports = {
-    REGISTER_USER_ENDPOINT : REGISTER_USER_ENDPOINT,
+    ROOT_API_ENDPOINT : ROOT_API_ENDPOINT,
+    REGISTER_USER_ENDPOINT : REGISTER_USER_ENDPOINT
 }

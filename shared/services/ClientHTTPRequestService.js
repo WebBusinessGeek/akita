@@ -1,9 +1,9 @@
-
+import {ROOT_API_ENDPOINT} from "./../constants/apiEndpoints"
 export default class ClientHTTPRequestService {
     constructor(successCB = null, errorCB = null) {
         this.successCB = successCB
         this.errorCB = errorCB
-        this.targetHost = "http://localhost:9090"
+        this.targetHost = ROOT_API_ENDPOINT
     }
 
     postRequest(path, data) {
