@@ -6,6 +6,7 @@ import {MAX_PASSWORD_LENGTH, MIN_PASSWORD_LENGTH} from "./../shared/constants/pa
 import validator from "validator"
 import User from "./../shared/db/models/User"
 import bcrypt from "bcrypt"
+import EmailValidator from "./../shared/services/EmailValidatorService"
 
 let router = newRouter()
 
@@ -25,20 +26,24 @@ router.post("/", parser.array(), (req, res) => {
     if(!validator.isLength(password, {min : MIN_PASSWORD_LENGTH, max : MAX_PASSWORD_LENGTH}) || !validator.isAlphanumeric(password)) {
         return res.json(failResponse(INVALID_PASSWORD_FORMAT_ERROR))
     }
-    console.log("DEBUG:", "validations passed")
     User.findOne({email: email})
         .then((user) => {
             if(user) {
-                console.log("DEBUG:", "user in db by that email")
                 return res.json(failResponse(USER_ALREADY_EXISTS_ERROR))
-            } else {
-                console.log("DEBUG:", "no user by that email")
-                User.create({
-                    email: email,
-                    password : bcrypt.hashSync(password, bcrypt.genSaltSync(10))
-                })
-                return res.json(successResponse(USER_REGISTRATION_SUCCESS))
             }
+            let emailValidator = new EmailValidator()
+            emailValidator.verifyAsync(email)
+                .then((resp) => {
+                    console.log(resp)
+                })
+                .catch((err) => {
+                    console.log(err)
+                })
+           /* User.create({
+                email: email,
+                password : bcrypt.hashSync(password, bcrypt.genSaltSync(10))
+            })
+            return res.json(successResponse(USER_REGISTRATION_SUCCESS))*/
         })
         .catch((err) => {
             return res.json(errorResponse(err))

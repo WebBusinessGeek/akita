@@ -41,7 +41,10 @@ export default class RegisterUserPage extends BasePage {
 
     sendRegistrationRequest(email, password) {
         let successCB = (response) => {
-            console.log(response)
+            if(response.status_code != 200) {
+                return this.throwError(response.message)
+            }
+            //log user in and go to dashboard
         }
 
         let errorCB = (xhr, status, err) => {
@@ -64,7 +67,7 @@ export default class RegisterUserPage extends BasePage {
         return(
             <div id="register-user-form-container">
                 <form id="register-user-form" className="text-center">
-                    <h2 id="register-user-form-heading" className="boldText">Hatch</h2>
+                    <h2 id="register-user-form-heading" className="boldText">Scalpel.io</h2>
                     <p id="register-user-form-blurb" className="greyText">Create your account below.</p>
                     <div>{this.state.errorMessage != null ? this.renderErrorMessage() : false }</div>
                     <div id="register-user-form-email-group" className="form-group">
