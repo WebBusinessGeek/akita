@@ -23,7 +23,7 @@ APP.use(bodyParser.urlencoded({extended: true}))
 /*set static directory*/
 APP.use(express.static(BUILD_DIRECTORY))
 
-User.sync({force:true})
+User.sync({})
 
 /*export the app instance*/
 export default APP

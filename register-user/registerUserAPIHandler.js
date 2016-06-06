@@ -26,7 +26,7 @@ router.post("/", parser.array(), (req, res) => {
     if(!validator.isLength(password, {min : MIN_PASSWORD_LENGTH, max : MAX_PASSWORD_LENGTH}) || !validator.isAlphanumeric(password)) {
         return res.json(failResponse(INVALID_PASSWORD_FORMAT_ERROR))
     }
-    User.findOne({email: email})
+    User.findOne({where: {email: email}})
         .then((user) => {
             if(user) {
                 return res.json(failResponse(USER_ALREADY_EXISTS_ERROR))
@@ -34,16 +34,19 @@ router.post("/", parser.array(), (req, res) => {
             let emailValidator = new EmailValidator()
             emailValidator.verifyAsync(email)
                 .then((resp) => {
-                    console.log(resp)
+                    if(!resp.format_valid || !resp.smtp_check) {
+                        return res.json(failResponse(INVALID_EMAIL_FORMAT_ERROR))
+                    } else {
+                        User.create({
+                            email: email,
+                            password: bcrypt.hashSync(password, bcrypt.genSaltSync(10))
+                        })
+                        return res.json(successResponse(USER_REGISTRATION_SUCCESS))
+                    }
                 })
                 .catch((err) => {
                     console.log(err)
                 })
-           /* User.create({
-                email: email,
-                password : bcrypt.hashSync(password, bcrypt.genSaltSync(10))
-            })
-            return res.json(successResponse(USER_REGISTRATION_SUCCESS))*/
         })
         .catch((err) => {
             return res.json(errorResponse(err))

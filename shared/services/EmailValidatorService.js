@@ -10,7 +10,7 @@ export default class EmailValidatorService {
 
     verify(email, cb) {
         request("http://apilayer.net/api/check?access_key=" + this.accessKey + "&email=" + email, (err, res, body) => {
-            return err ? cb(err) : cb(false, body)
+            return err ? cb(err) : cb(null, JSON.parse(res.body))
         })
     }
 
