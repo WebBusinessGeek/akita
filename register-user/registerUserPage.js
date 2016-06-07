@@ -44,11 +44,11 @@ export default class RegisterUserPage extends BasePage {
             if(response.status_code != 200) {
                 return this.throwError(response.message)
             }
-            //log user in and go to dashboard
+        //    whats next?????
         }
 
         let errorCB = (xhr, status, err) => {
-            console.log(err)
+            return this.logError(err)
         }
 
         let Request = this.newHTTPRequest(successCB, errorCB)

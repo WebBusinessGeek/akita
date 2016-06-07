@@ -7,8 +7,14 @@ export default class BasePage extends React.Component {
         this.newHTTPRequest = this.newHTTPRequest.bind(this)
     }
     
+    logError(error) {
+        console.log(error)
+    }
+    
     newHTTPRequest(successCB, errorCB) {
         return new ClientHTTPRequestService(successCB, errorCB)
     }
+    
+    
     
 }
