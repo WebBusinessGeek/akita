@@ -2,11 +2,12 @@ import {newRouter, parser} from "./../shared/services/APIRoutingService"
 import {successResponse, errorResponse, failResponse} from "./../shared/services/APIResponseService"
 import {MISSING_EMAIL_ERROR, MISSING_PASSWORD_ERROR, INVALID_EMAIL_FORMAT_ERROR,
     INVALID_PASSWORD_FORMAT_ERROR, USER_ALREADY_EXISTS_ERROR, INVALID_EMAIL_ERROR, USER_REGISTRATION_SUCCESS} from "./../shared/constants/notifications"
-import {MAX_PASSWORD_LENGTH, MIN_PASSWORD_LENGTH} from "./../shared/constants/passwords"
+import {MAX_PASSWORD_LENGTH, MIN_PASSWORD_LENGTH} from "../shared/constants/auth"
 import validator from "validator"
 import User from "./../shared/db/models/User"
 import bcrypt from "bcrypt"
 import EmailValidator from "./../shared/services/EmailValidatorService"
+import jwt from "jsonwebtoken"
 
 let router = newRouter()
 
@@ -41,7 +42,10 @@ router.post("/", parser.array(), (req, res) => {
                             email: email,
                             password: bcrypt.hashSync(password, bcrypt.genSaltSync(10))
                         })
-                        return res.json(successResponse(USER_REGISTRATION_SUCCESS))
+                            .then((user) => {
+                                let token = jwt.sign({user: user}, "secret", {expiresIn: 60})
+                                return res.json(successResponse(USER_REGISTRATION_SUCCESS, {token : token}))
+                            })
                     }
                 })
                 .catch((err) => {
