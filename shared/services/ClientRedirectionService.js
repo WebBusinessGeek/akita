@@ -9,9 +9,13 @@ export default class ClientRedirectionService {
     setAuth(token) {
         localStorage.setItem(TOKEN_CLIENT_STORAGE_KEY, token)
     }
+
+    redirect(path) {
+        window.location = CLIENT_ROUTE_PREFIX + path
+    }
     
     redirectWithAuth(path, token) {
         this.setAuth(token)
-        window.location = CLIENT_ROUTE_PREFIX + path
+        this.redirect(path)
     }
 }

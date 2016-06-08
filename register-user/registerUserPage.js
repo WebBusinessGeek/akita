@@ -7,6 +7,7 @@ import {Link} from "react-router"
 import {MISMATCH_PASSWORD_ERROR, INCOMPLETE_FORM_ERROR, INVALID_EMAIL_FORMAT_ERROR} from "./../shared/constants/notifications"
 import validator from "validator"
 import Redirect from "./../shared/services/ClientRedirectionService"
+import {DASHBOARD_ROUTE} from "./../shared/constants/clientRoutes"
 
 export default class RegisterUserPage extends BasePage {
     constructor() {
@@ -43,10 +44,10 @@ export default class RegisterUserPage extends BasePage {
     sendRegistrationRequest(email, password) {
         let successCB = (response) => {
             if(response.status_code != 200) {
-                return this.throwError(response.message)
+                this.throwError(response.message)
             }
-            let Redirector = new Redirect()
-            Redirector.redirectWithAuth("dashboard", response.payload.data.token)
+            let redirect = new Redirect()
+            redirect.redirectWithAuth(DASHBOARD_ROUTE, response.payload.data.token)
         }
 
         let errorCB = (xhr, status, err) => {
