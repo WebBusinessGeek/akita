@@ -6,8 +6,7 @@ import UIContainer from "./uiContainer"
 import RegisterUserPage from "./../register-user/registerUserPage"
 import Dashboard from "./dashboard"
 
-
-let requireAuth = "FILL IN"
+import requireAuth from "./../shared/middleware/requireAuth"
 
 let routes = (
     <Router history={hashHistory}>
