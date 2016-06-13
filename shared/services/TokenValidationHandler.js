@@ -1,5 +1,5 @@
 import {newRouter, parser} from "./../services/APIRoutingService"
-import {successResponse, errorResponse, failResponse} from "./../services/APIResponseService"
+import {successResponse, failResponse} from "./../services/APIResponseService"
 import {MISSING_TOKEN_ERROR, USER_AUTH_CHECK_SUCCESS, USER_AUTH_CHECK_FAILED} from  "./../constants/notifications"
 import jwt from "jsonwebtoken"
 import {TOKEN_SECRET} from "./../_private/token_secret"
