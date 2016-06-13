@@ -1,25 +1,26 @@
 import {TOKEN_CLIENT_STORAGE_KEY} from "./../constants/auth"
 import {SUCCESSFUL_API_STATUS} from "./../constants/apiResponses"
 import ClientHTTPRequestService from "./../services/ClientHTTPRequestService"
+import Promise from "bluebird"
 
 export default class AuthenticationCheckService {
     constructor() {
-
+        Promise.promisifyAll(this)
     }
 
-    isAuthenticated() {
+    isAuthenticated(cb) {
         let token = localStorage.getItem(TOKEN_CLIENT_STORAGE_KEY)
         if(token) {
             let successCB = (response) => {
-                return response.status === SUCCESSFUL_API_STATUS
+                return cb(null, response.status == SUCCESSFUL_API_STATUS)
             }
             let errorCB = (xhr, status, err) => {
-                return console.log(err)
+                cb()
             }
             let request = new ClientHTTPRequestService(successCB, errorCB)
             request.postRequest("/tokens/validate", {token: token})
         } else {
-            return false
+            return cb(null, false)
         }
     }
 }
