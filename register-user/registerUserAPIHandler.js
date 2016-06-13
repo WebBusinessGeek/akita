@@ -44,7 +44,7 @@ router.post("/", parser.array(), (req, res) => {
                             password: bcrypt.hashSync(password, bcrypt.genSaltSync(10))
                         })
                             .then((user) => {
-                                let token = jwt.sign({user: user}, TOKEN_SECRET, {expiresIn: 60})
+                                let token = jwt.sign({user: user}, TOKEN_SECRET, {expiresIn: "60m"})
                                 return res.json(successResponse(USER_REGISTRATION_SUCCESS, {token : token}))
                             })
                     }

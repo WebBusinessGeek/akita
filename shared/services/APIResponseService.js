@@ -1,4 +1,4 @@
-import {SUCCESSFUL_API_STATUS, FAILED_API_STATUS, ERRORED_API_STATUS
+import {SUCCESSFUL_API_STATUS, FAILED_API_STATUS, ERRORED_API_STATUS,
 SUCCESS_OK_CODE, INPUT_ERROR_CODE, SERVER_ERROR_CODE} from "./../constants/apiResponses"
 
 function httpResponse(message, status, code, data) {

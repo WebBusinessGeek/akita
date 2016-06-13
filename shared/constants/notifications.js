@@ -8,3 +8,5 @@ export const USER_ALREADY_EXISTS_ERROR = "User already registered. Please log in
 export const INVALID_EMAIL_ERROR = "Email provided is invalid."
 export const USER_REGISTRATION_SUCCESS = "User successfully registered."
 export const MISSING_TOKEN_ERROR = "No token provided."
+export const USER_AUTH_CHECK_SUCCESS = "User is authenticated."
+export const USER_AUTH_CHECK_FAILED = "User is not authenticated."

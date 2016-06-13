@@ -13,7 +13,10 @@ export default class AuthenticationCheckService {
             let successCB = (response) => {
                 return response.status === SUCCESSFUL_API_STATUS
             }
-            let request = new ClientHTTPRequestService(successCB)
+            let errorCB = (xhr, status, err) => {
+                return console.log(err)
+            }
+            let request = new ClientHTTPRequestService(successCB, errorCB)
             request.postRequest("/tokens/validate", {token: token})
         } else {
             return false
