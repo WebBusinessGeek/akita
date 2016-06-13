@@ -12,11 +12,8 @@ router.post("/", parser.array(), (req, res) => {
         return res.json(failResponse(MISSING_TOKEN_ERROR))
     }
     jwt.verify(token, TOKEN_SECRET, (err) => {
-        if(!err) {
-            return res.json(successResponse(USER_AUTH_CHECK_SUCCESS))
-        } else {
-            return res.json(failResponse(USER_AUTH_CHECK_FAILED))
-        }
+        return (!err) ?
+            res.json(successResponse(USER_AUTH_CHECK_SUCCESS)) : res.json(failResponse(USER_AUTH_CHECK_FAILED))
     })
 })
 
