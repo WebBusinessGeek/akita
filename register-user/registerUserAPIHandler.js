@@ -7,8 +7,7 @@ import validator from "validator"
 import User from "./../shared/db/models/User"
 import bcrypt from "bcrypt"
 import EmailValidator from "./../shared/services/EmailValidatorService"
-import jwt from "jsonwebtoken"
-import {TOKEN_SECRET} from "./../shared/_private/token_secret"
+import TokenProvider from "./../shared/services/TokenProviderService"
 
 let router = newRouter()
 
@@ -44,13 +43,11 @@ router.post("/", parser.array(), (req, res) => {
                             password: bcrypt.hashSync(password, bcrypt.genSaltSync(10))
                         })
                             .then((user) => {
-                                let token = jwt.sign({user: user}, TOKEN_SECRET, {expiresIn: "60m"})
+                                let tokenProvider = new TokenProvider()
+                                let token = tokenProvider.newToken(user)
                                 return res.json(successResponse(USER_REGISTRATION_SUCCESS, {token : token}))
                             })
                     }
-                })
-                .catch((err) => {
-                    console.log(err)
                 })
         })
         .catch((err) => {
