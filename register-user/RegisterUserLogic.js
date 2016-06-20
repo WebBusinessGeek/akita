@@ -36,17 +36,17 @@ export default class RegisterUserLogic {
         return cb()
     }
     
-    attemptToRegisterUser(email, password) {
+    attemptToRegisterUser(email, password, cb) {
         User.findOne({where: {email: email}})
             .then((user) => {
                 if(user) {
-                    return this.jsonResponse(failResponse(USER_ALREADY_EXISTS_ERROR))
+                    return this.jsonResponse(failResponse(USER_ALREADY_EXISTS_ERROR), cb)
                 }
                 let emailValidator = new EmailValidator()
                 emailValidator.verifyAsync(email)
                     .then((resp) => {
                         if(!resp.format_valid || !resp.smtp_check) {
-                            return this.jsonResponse(failResponse(INVALID_EMAIL_ERROR))
+                            return this.jsonResponse(failResponse(INVALID_EMAIL_ERROR), cb)
                         } else {
                             User.create({
                                 email: email,
@@ -55,13 +55,13 @@ export default class RegisterUserLogic {
                                 .then((user) => {
                                     let tokenProvider = new TokenProvider()
                                     let token = tokenProvider.newToken(user)
-                                    return this.jsonResponse(successResponse(USER_REGISTRATION_SUCCESS, {token : token}))
+                                    return this.jsonResponse(successResponse(USER_REGISTRATION_SUCCESS, {token : token}), cb)
                                 })
                         }
                     })
             })
             .catch((err) => {
-                return this.jsonResponse(errorResponse(err))
+                return this.jsonResponse(errorResponse(err), cb)
             })
     }
 
