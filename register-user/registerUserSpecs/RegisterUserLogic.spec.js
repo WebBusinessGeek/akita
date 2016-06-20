@@ -9,7 +9,7 @@ let assert = chai.assert
 
 describe("RegisterUserLogic", () => {
     describe("run", () => {
-        describe("no email present", () => {
+        describe("if no email present", () => {
             let res = ""
             let classUnderTest = new RegisterUserLogic()
 
@@ -31,7 +31,7 @@ describe("RegisterUserLogic", () => {
                 done()
             })
         })
-        describe("no password present", () => {
+        describe("if no password present", () => {
             let res = ""
             let classUnderTest = new RegisterUserLogic()
 
@@ -53,9 +53,73 @@ describe("RegisterUserLogic", () => {
                 done()
             })
         })
-        /*if badly formatted email - should return correct error*/
-        /*if badly formatted password - should return correct error*/
-        /*if all checks pass, should call attemptToRegisterUser*/
+        describe("if badly formatted email", () => {
+            let res = ""
+            let classUnderTest = new RegisterUserLogic(res)
+
+            let email = "invalid@format"
+            let password = "bad"
+
+            let returnCB = (response, cb) => {return cb()}
+            let jsonResponseStub = sinon.stub(classUnderTest, "jsonResponse", returnCB)
+
+            before((done) => {
+
+                classUnderTest.run(email, password, () => {
+                    done()
+                })
+            })
+            it("should return failResponse with INVALID_EMAIL_FORMAT_ERROR", (done) => {
+                let expectedArg = failResponse(INVALID_EMAIL_FORMAT_ERROR)
+                assert.isTrue(jsonResponseStub.calledWith(expectedArg))
+                done()
+            })
+        })
+        describe("if badly formatted password", () => {
+            let res = ""
+            let classUnderTest = new RegisterUserLogic(res)
+
+            let email = "valid@format.com"
+            let password = "bad"
+
+            let returnCB = (response, cb) => {return cb()}
+            let jsonResponseStub = sinon.stub(classUnderTest, "jsonResponse", returnCB)
+
+            before((done) => {
+
+                classUnderTest.run(email, password, () => {
+                    done()
+                })
+            })
+            it("should return failResponse with INVALID_EMAIL_FORMAT_ERROR", (done) => {
+                let expectedArg = failResponse(INVALID_PASSWORD_FORMAT_ERROR)
+                assert.isTrue(jsonResponseStub.calledWith(expectedArg))
+                done()
+            })
+        })
+        describe("if all checks pass", () => {
+            let res = ""
+            let classUnderTest = new RegisterUserLogic(res)
+
+            let email = "valid@format.com"
+            let password = "validPassword"
+
+            let returnCB = (email, password, cb) => {return cb()}
+            let attemptToRegisterUserStub = sinon.stub(classUnderTest, "attemptToRegisterUser", returnCB)
+
+            before((done) => {
+
+                classUnderTest.run(email, password, () => {
+                    done()
+                })
+            })
+            it("should call attemptToRegisterUser with email and password passed", (done) => {
+                let expectedArg1 = email
+                let expectedArg2 = password
+                assert.isTrue(attemptToRegisterUserStub.calledWith(expectedArg1, expectedArg2))
+                done()
+            })
+        })
     })
     describe("jsonResponse", () => {})
     describe("attemptToRegisterUser", () => {})

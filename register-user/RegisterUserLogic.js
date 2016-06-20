@@ -23,12 +23,12 @@ export default class RegisterUserLogic {
             return this.jsonResponse(failResponse(MISSING_PASSWORD_ERROR), cb)
         }
         if(!validator.isEmail(email)) {
-            this.jsonResponse(failResponse(INVALID_EMAIL_FORMAT_ERROR))
+            return this.jsonResponse(failResponse(INVALID_EMAIL_FORMAT_ERROR), cb)
         }
         if(!validator.isLength(password, {min : MIN_PASSWORD_LENGTH, max : MAX_PASSWORD_LENGTH}) || !validator.isAlphanumeric(password)) {
-            this.jsonResponse(failResponse(INVALID_PASSWORD_FORMAT_ERROR))
+            return this.jsonResponse(failResponse(INVALID_PASSWORD_FORMAT_ERROR), cb)
         }
-        this.attemptToRegisterUser(email, password)
+        return this.attemptToRegisterUser(email, password, cb)
     }
 
     jsonResponse(response, cb) {
