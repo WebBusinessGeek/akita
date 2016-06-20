@@ -1,6 +1,7 @@
 import {successResponse, errorResponse, failResponse} from "./../shared/services/APIResponseService"
 import {MISSING_EMAIL_ERROR, MISSING_PASSWORD_ERROR, INVALID_EMAIL_FORMAT_ERROR,
-    INVALID_PASSWORD_FORMAT_ERROR, USER_ALREADY_EXISTS_ERROR, INVALID_EMAIL_ERROR, USER_REGISTRATION_SUCCESS} from "./../shared/constants/notifications"
+    INVALID_PASSWORD_FORMAT_ERROR, USER_ALREADY_EXISTS_ERROR, INVALID_EMAIL_ERROR, 
+    USER_REGISTRATION_SUCCESS} from "./../shared/constants/notifications"
 import {MAX_PASSWORD_LENGTH, MIN_PASSWORD_LENGTH} from "../shared/constants/auth"
 import validator from "validator"
 import User from "./../shared/db/models/User"
@@ -14,24 +15,25 @@ export default class RegisterUserLogic {
         this.res = res
     }
     
-    run(email, password) {
+    run(email, password, cb) {
         if(!email) {
-            this.jsonResponse(failResponse(MISSING_EMAIL_ERROR))
+            return this.jsonResponse(failResponse(MISSING_EMAIL_ERROR), cb)
         }
         if(!password) {
-            this.jsonResponse(failResponse(MISSING_PASSWORD_ERROR))
+            return this.jsonResponse(failResponse(MISSING_PASSWORD_ERROR), cb)
         }
         if(!validator.isEmail(email)) {
-            this.jsonResponse(failResponse(INVALID_EMAIL_ERROR))
+            this.jsonResponse(failResponse(INVALID_EMAIL_FORMAT_ERROR))
         }
         if(!validator.isLength(password, {min : MIN_PASSWORD_LENGTH, max : MAX_PASSWORD_LENGTH}) || !validator.isAlphanumeric(password)) {
-            this.jsonResponse(failResponse(INVALID_EMAIL_FORMAT_ERROR))
+            this.jsonResponse(failResponse(INVALID_PASSWORD_FORMAT_ERROR))
         }
         this.attemptToRegisterUser(email, password)
     }
 
-    jsonResponse(response) {
-        return this.res.json(response)
+    jsonResponse(response, cb) {
+        this.res.json(response)
+        return cb()
     }
     
     attemptToRegisterUser(email, password) {
