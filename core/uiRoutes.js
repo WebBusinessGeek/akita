@@ -4,7 +4,7 @@ import {DASHBOARD_ROUTE} from "./../shared/constants/clientRoutes"
 
 /*components*/
 import UIContainer from "./uiContainer"
-import RegisterUserPage from "./../register-user/registerUserPage"
+import RegisterUserPage from "../register-user/RegisterUserPage"
 import Dashboard from "./dashboard"
 
 /*middleware*/
