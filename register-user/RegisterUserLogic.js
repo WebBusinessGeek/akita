@@ -41,24 +41,21 @@ export default class RegisterUserLogic {
         this.checkIfUserExistsAsync(email)
             .then((user) => {
                 if(user) {
-                    return this.jsonResponse(failResponse(USER_ALREADY_EXISTS_ERROR), cb)
-                } else { 
-                    this.checkIfEmailIsValidAsync(email)
-                        .then((valid) => {
-                            if(!valid) {
-                                return this.jsonResponse(failResponse(INVALID_EMAIL_ERROR), cb)
-                            } else {
-                                this.registerAndProvideTokenAsync(email, password)
-                                    .then((token) => {
-                                        return this.jsonResponse(successResponse(USER_REGISTRATION_SUCCESS, {token : token}), cb)
-                                    })
-                            }
-                        })
-                  
+                    this.jsonResponse(failResponse(USER_ALREADY_EXISTS_ERROR), cb)
                 }
+                return this.checkIfEmailIsValidAsync(email)
+            })
+            .then((valid) => {
+                if(!valid) {
+                    this.jsonResponse(failResponse(INVALID_EMAIL_ERROR), cb)
+                }
+                return this.registerAndProvideTokenAsync(email, password)
+            })
+            .then((token) => {
+                return this.jsonResponse(successResponse(USER_REGISTRATION_SUCCESS, {token : token}), cb)
             })
             .catch((err) => {
-                return this.jsonResponse(errorResponse(err), cb)
+                this.jsonResponse(errorResponse(err), cb)
             })
     }
 
