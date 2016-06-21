@@ -7,6 +7,8 @@ import sinon from "sinon"
 import chai from "chai"
 let assert = chai.assert
 
+import User from "./../../shared/db/models/User"
+
 describe("RegisterUserLogic", () => {
     describe("run", () => {
         describe("if no email present", () => {
@@ -143,5 +145,34 @@ describe("RegisterUserLogic", () => {
             })
         })
     })
-    describe("attemptToRegisterUser", () => {})
+    describe("attemptToRegisterUser", () => {
+        describe("if user already exists", () =>{
+            let res = ""
+            let classUnderTest = new RegisterUserLogic(res)
+
+            let email =  "valid@format.com"
+            let password = "validPassword"
+
+            let checkIfUserExistsStubFn = (email, cb) => {return cb(null, true)}
+            let checkIfUserExistsStub = sinon.stub(classUnderTest, "checkIfUserExists", checkIfUserExistsStubFn)
+
+            let jsonResponseStubFn = (response, cb) => { return cb()}
+            let jsonResponseStub = sinon.stub(classUnderTest, "jsonResponse", jsonResponseStubFn)
+
+            before((done) => {
+                classUnderTest.attemptToRegisterUser(email, password, () => {
+                    done()
+                })
+            })
+            it("should return USER_ALREADY_EXISTS_ERROR message", (done) => {
+                let expectedArg = failResponse(USER_ALREADY_EXISTS_ERROR)
+                assert.isTrue(jsonResponseStub.calledWith(expectedArg))
+                done()
+            })
+        })
+        describe("if email is invalid", () => {
+            
+        })
+        describe("if all checks pass", () => {})
+    })
 })

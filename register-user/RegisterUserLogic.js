@@ -8,11 +8,12 @@ import User from "./../shared/db/models/User"
 import bcrypt from "bcrypt"
 import EmailValidator from "./../shared/services/EmailValidatorService"
 import TokenProvider from "./../shared/services/TokenProviderService"
-
+import Promise from "bluebird"
 
 export default class RegisterUserLogic {
     constructor(res) {
         this.res = res
+        Promise.promisifyAll(this)
     }
     
     run(email, password, cb) {
@@ -37,31 +38,43 @@ export default class RegisterUserLogic {
     }
     
     attemptToRegisterUser(email, password, cb) {
-        User.findOne({where: {email: email}})
+        /*check if user exists*/
+        this.checkIfUserExistsAsync(email)
             .then((user) => {
                 if(user) {
                     return this.jsonResponse(failResponse(USER_ALREADY_EXISTS_ERROR), cb)
-                }
-                let emailValidator = new EmailValidator()
-                emailValidator.verifyAsync(email)
-                    .then((resp) => {
-                        if(!resp.format_valid || !resp.smtp_check) {
-                            return this.jsonResponse(failResponse(INVALID_EMAIL_ERROR), cb)
-                        } else {
-                            User.create({
-                                email: email,
-                                password: bcrypt.hashSync(password, bcrypt.genSaltSync(10))
-                            })
-                                .then((user) => {
-                                    let tokenProvider = new TokenProvider()
-                                    let token = tokenProvider.newToken(user)
-                                    return this.jsonResponse(successResponse(USER_REGISTRATION_SUCCESS, {token : token}), cb)
+                } else {
+                    let emailValidator = new EmailValidator()
+                    emailValidator.verifyAsync(email)
+                        .then((resp) => {
+                            if(!resp.format_valid || !resp.smtp_check) {
+                                return this.jsonResponse(failResponse(INVALID_EMAIL_ERROR), cb)
+                            } else {
+                                User.create({
+                                    email: email,
+                                    password: bcrypt.hashSync(password, bcrypt.genSaltSync(10))
                                 })
-                        }
-                    })
+                                    .then((user) => {
+                                        let tokenProvider = new TokenProvider()
+                                        let token = tokenProvider.newToken(user)
+                                        return this.jsonResponse(successResponse(USER_REGISTRATION_SUCCESS, {token : token}), cb)
+                                    })
+                            }
+                        })
+                }
             })
             .catch((err) => {
-                return this.jsonResponse(errorResponse(err), cb)
+                return this.jsonResponse(errorResponse(err))
+            })
+    }
+
+    checkIfUserExists(email, cb) {
+        User.findOne({where: {email: email}})
+            .then((user) => {
+                cb(null, user !== null)
+            })
+            .catch((err) => {
+                cb(err)
             })
     }
 
