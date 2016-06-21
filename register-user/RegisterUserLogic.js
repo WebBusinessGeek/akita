@@ -48,13 +48,8 @@ export default class RegisterUserLogic {
                             if(!valid) {
                                 return this.jsonResponse(failResponse(INVALID_EMAIL_ERROR), cb)
                             } else {
-                                User.create({
-                                    email: email,
-                                    password: bcrypt.hashSync(password, bcrypt.genSaltSync(10))
-                                })
-                                    .then((user) => {
-                                        let tokenProvider = new TokenProvider()
-                                        let token = tokenProvider.newToken(user)
+                                this.registerAndProvideTokenAsync(email, password)
+                                    .then((token) => {
                                         return this.jsonResponse(successResponse(USER_REGISTRATION_SUCCESS, {token : token}), cb)
                                     })
                             }
@@ -63,7 +58,7 @@ export default class RegisterUserLogic {
                 }
             })
             .catch((err) => {
-                return this.jsonResponse(errorResponse(err))
+                return this.jsonResponse(errorResponse(err), cb)
             })
     }
 
@@ -83,6 +78,18 @@ export default class RegisterUserLogic {
             .then((resp) => {
                 let valid = (!resp.format_valid || !resp.smtp_check) ? false : true
                 cb(null, valid)
+            })
+            .catch((err) => {
+                cb(err)
+            })
+    }
+
+    registerAndProvideToken(email, password, cb) {
+        User.create({ email: email, password: bcrypt.hashSync(password, bcrypt.genSaltSync(10))})
+            .then((user) => {
+                let tokenProvider = new TokenProvider()
+                let token = tokenProvider.newToken(user)
+                cb(null, token)
             })
             .catch((err) => {
                 cb(err)

@@ -1,5 +1,5 @@
 import RegisterUserLogic from "./../RegisterUserLogic"
-import {failResponse} from "./../../shared/services/APIResponseService"
+import {failResponse, successResponse} from "./../../shared/services/APIResponseService"
 import {MISSING_EMAIL_ERROR, MISSING_PASSWORD_ERROR, INVALID_EMAIL_FORMAT_ERROR,
     INVALID_PASSWORD_FORMAT_ERROR, USER_ALREADY_EXISTS_ERROR, INVALID_EMAIL_ERROR,
     USER_REGISTRATION_SUCCESS} from "./../../shared/constants/notifications"
@@ -199,7 +199,35 @@ describe("RegisterUserLogic", () => {
             })
         })
         describe("if all checks pass", () => {
+            let res = ""
+            let classUnderTest = new RegisterUserLogic(res)
+
+            let email = "valid@format.com"
+            let password = "validPassword"
+
+            let checkIfUserExistsStubFn = (email, cb) => {return cb(null, false)}
+            let checkIfUserExistsStub = sinon.stub(classUnderTest, "checkIfUserExists", checkIfUserExistsStubFn)
+
+            let checkIfEmailIsValidStubFn = (email, cb) => {return cb(null, true)}
+            let checkIfEmailIsValidStub = sinon.stub(classUnderTest, "checkIfEmailIsValid", checkIfEmailIsValidStubFn)
+
+            let registerAndProvideTokenStubFn = (email, password, cb) => {return cb(null, {})}
+            let registerAndProvideTokenStub = sinon.stub(classUnderTest, "registerAndProvideToken", registerAndProvideTokenStubFn)
+
+            let jsonResponseStubFn = (response, cb) => {return cb()}
+            let jsonResponseStub = sinon.stub(classUnderTest, "jsonResponse", jsonResponseStubFn)
             
+            before((done) => {
+                classUnderTest.attemptToRegisterUser(email, password, () => {
+                    done()
+                })
+            })
+
+            it("should return USER_REGISTRATION_SUCCESS message and a token", (done) => {
+                let expectedArg1 = successResponse(USER_REGISTRATION_SUCCESS, {token: {}})
+                assert.isTrue(jsonResponseStub.calledWith(expectedArg1))
+                done()
+            })
         })
     })
 })
