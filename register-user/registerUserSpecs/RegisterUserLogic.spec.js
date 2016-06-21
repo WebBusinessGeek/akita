@@ -171,8 +171,35 @@ describe("RegisterUserLogic", () => {
             })
         })
         describe("if email is invalid", () => {
+            let res = ""
+            let classUnderTest = new RegisterUserLogic(res)
+
+            let email = "valid@format.com"
+            let password = "validPassword"
+
+            let checkIfUserExistsStubFn = (email, cb) => {return cb(null, false)}
+            let checkIfUserExistsStub = sinon.stub(classUnderTest, "checkIfUserExists", checkIfUserExistsStubFn)
+
+            let checkIfEmailIsValidStubFn = (email, cb) => {return cb(null, false)}
+            let checkIfEmailIsValidStub = sinon.stub(classUnderTest, "checkIfEmailIsValid", checkIfEmailIsValidStubFn)
+
+            let jsonResponseStubFn = (response, cb) => {return cb()}
+            let jsonResponseStub = sinon.stub(classUnderTest, "jsonResponse", jsonResponseStubFn)
+
+            before((done) => {
+                classUnderTest.attemptToRegisterUser(email, password, () => {
+                    done()
+                })
+            })
+
+            it("should return INVALID_EMAIL_ERROR message", (done) => {
+                let expectedArg = failResponse(INVALID_EMAIL_ERROR)
+                assert.isTrue(jsonResponseStub.calledWith(expectedArg))
+                done()
+            })
+        })
+        describe("if all checks pass", () => {
             
         })
-        describe("if all checks pass", () => {})
     })
 })

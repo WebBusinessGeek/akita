@@ -38,16 +38,14 @@ export default class RegisterUserLogic {
     }
     
     attemptToRegisterUser(email, password, cb) {
-        /*check if user exists*/
         this.checkIfUserExistsAsync(email)
             .then((user) => {
                 if(user) {
                     return this.jsonResponse(failResponse(USER_ALREADY_EXISTS_ERROR), cb)
-                } else {
-                    let emailValidator = new EmailValidator()
-                    emailValidator.verifyAsync(email)
-                        .then((resp) => {
-                            if(!resp.format_valid || !resp.smtp_check) {
+                } else { 
+                    this.checkIfEmailIsValidAsync(email)
+                        .then((valid) => {
+                            if(!valid) {
                                 return this.jsonResponse(failResponse(INVALID_EMAIL_ERROR), cb)
                             } else {
                                 User.create({
@@ -61,6 +59,7 @@ export default class RegisterUserLogic {
                                     })
                             }
                         })
+                  
                 }
             })
             .catch((err) => {
@@ -72,6 +71,18 @@ export default class RegisterUserLogic {
         User.findOne({where: {email: email}})
             .then((user) => {
                 cb(null, user !== null)
+            })
+            .catch((err) => {
+                cb(err)
+            })
+    }
+    
+    checkIfEmailIsValid(email, cb) {
+        let emailValidator = new EmailValidator()
+        emailValidator.verifyAsync(email)
+            .then((resp) => {
+                let valid = (!resp.format_valid || !resp.smtp_check) ? false : true
+                cb(null, valid)
             })
             .catch((err) => {
                 cb(err)
