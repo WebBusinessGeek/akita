@@ -121,6 +121,27 @@ describe("RegisterUserLogic", () => {
             })
         })
     })
-    describe("jsonResponse", () => {})
+    describe("jsonResponse", () => {
+        describe("if called", () => {
+            let res = {
+                json : (response) => {return response}
+            }
+            let classUnderTest = new RegisterUserLogic(res)
+            let response = failResponse(MISSING_EMAIL_ERROR)
+
+            let jsonSpy = sinon.spy(classUnderTest.res, "json")
+
+            before((done) => {
+                classUnderTest.jsonResponse(response, () => {
+                    done()
+                })
+            })
+            it("should call the res.json function", (done) => {
+                let expectedArg = response
+                assert.isTrue(jsonSpy.calledWith(expectedArg))
+                done()
+            })
+        })
+    })
     describe("attemptToRegisterUser", () => {})
 })
