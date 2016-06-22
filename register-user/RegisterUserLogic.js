@@ -34,20 +34,20 @@ export default class RegisterUserLogic {
 
     jsonResponse(response, cb) {
         this.res.json(response)
-        return cb()
+        cb()
     }
     
     attemptToRegisterUser(email, password, cb) {
         this.checkIfUserExistsAsync(email)
             .then((user) => {
                 if(user) {
-                    this.jsonResponse(failResponse(USER_ALREADY_EXISTS_ERROR), cb)
+                    throw new Error(USER_ALREADY_EXISTS_ERROR)
                 }
                 return this.checkIfEmailIsValidAsync(email)
             })
             .then((valid) => {
                 if(!valid) {
-                    this.jsonResponse(failResponse(INVALID_EMAIL_ERROR), cb)
+                    throw new Error(INVALID_EMAIL_ERROR)
                 }
                 return this.registerAndProvideTokenAsync(email, password)
             })
@@ -55,7 +55,7 @@ export default class RegisterUserLogic {
                 return this.jsonResponse(successResponse(USER_REGISTRATION_SUCCESS, {token : token}), cb)
             })
             .catch((err) => {
-                this.jsonResponse(errorResponse(err), cb)
+                return this.jsonResponse(failResponse(err.message), cb)
             })
     }
 

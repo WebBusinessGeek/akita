@@ -7,8 +7,6 @@ import sinon from "sinon"
 import chai from "chai"
 let assert = chai.assert
 
-import User from "./../../shared/db/models/User"
-
 describe("RegisterUserLogic", () => {
     describe("run", () => {
         describe("if no email present", () => {
@@ -134,9 +132,7 @@ describe("RegisterUserLogic", () => {
             let jsonSpy = sinon.spy(classUnderTest.res, "json")
 
             before((done) => {
-                classUnderTest.jsonResponse(response, () => {
-                    done()
-                })
+                classUnderTest.jsonResponse(response, done)
             })
             it("should call the res.json function", (done) => {
                 let expectedArg = response
@@ -160,9 +156,7 @@ describe("RegisterUserLogic", () => {
             let jsonResponseStub = sinon.stub(classUnderTest, "jsonResponse", jsonResponseStubFn)
 
             before((done) => {
-                classUnderTest.attemptToRegisterUser(email, password, () => {
-                    done()
-                })
+                classUnderTest.attemptToRegisterUser(email, password, done)
             })
             it("should return USER_ALREADY_EXISTS_ERROR message", (done) => {
                 let expectedArg = failResponse(USER_ALREADY_EXISTS_ERROR)
