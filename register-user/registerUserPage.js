@@ -33,6 +33,7 @@ export default class RegisterUserPage extends BasePage {
         if(!validator.isEmail(email)) {
             return this.throwError(INVALID_EMAIL_FORMAT_ERROR)
         }
+
         return (password != conf_password) ?
             this.throwError(MISMATCH_PASSWORD_ERROR) : this.sendRegistrationRequest(email, password)
     }
@@ -44,7 +45,7 @@ export default class RegisterUserPage extends BasePage {
     sendRegistrationRequest(email, password) {
         let successCB = (response) => {
             if(response.status_code != 200) {
-                this.throwError(response.message)
+                return this.throwError(response.message)
             }
             let redirect = new Redirect()
             redirect.redirectWithAuth(DASHBOARD_ROUTE, response.payload.data.token)

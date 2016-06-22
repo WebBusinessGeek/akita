@@ -1,4 +1,4 @@
-import {successResponse, errorResponse, failResponse} from "./../shared/services/APIResponseService"
+import {successResponse, failResponse} from "./../shared/services/APIResponseService"
 import {MISSING_EMAIL_ERROR, MISSING_PASSWORD_ERROR, INVALID_EMAIL_FORMAT_ERROR,
     INVALID_PASSWORD_FORMAT_ERROR, USER_ALREADY_EXISTS_ERROR, INVALID_EMAIL_ERROR, 
     USER_REGISTRATION_SUCCESS} from "./../shared/constants/notifications"

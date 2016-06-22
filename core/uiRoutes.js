@@ -1,5 +1,5 @@
 import React from "react"
-import { Router, IndexRoute, Route, hashHistory } from "react-router"
+import { Router, IndexRoute, Route, browserHistory } from "react-router"
 import {DASHBOARD_ROUTE} from "./../shared/constants/clientRoutes"
 
 /*components*/
@@ -13,7 +13,7 @@ import requireAuth from "./../shared/middleware/requireAuth"
 
 /*routing*/
 let routes = (
-    <Router history={hashHistory}>
+    <Router history={browserHistory}>
        <Route path="/" component={UIContainer}>
            <IndexRoute component={RegisterUserPage} onEnter={redirectIfAuthenticated} />
            <Route path={DASHBOARD_ROUTE} component={Dashboard} onEnter={requireAuth}>
