@@ -37,6 +37,16 @@ module.exports = {
                 ],
                 loader: "style!css!sass-loader!"
             },
+            {
+                test: /\.(png|jpg|gif)$/,
+                include: [
+                    Root + "/",
+                ],
+                exclude: [
+                    node_modules_dir,
+                ],
+                loader: "url?limit=8192"
+            },
         ]
     }
 }

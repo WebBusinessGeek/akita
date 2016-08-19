@@ -86,12 +86,12 @@ export default class RegisterUserPage extends BasePage {
                         <label htmlFor="confirmPasswordInput"></label>
                         <input type="password" className="form-control register-user-form-inputs" ref="conf_passwordInput" id="confirmPasswordInput" placeholder="Confirm It" />
                     </div>
+                    <button id="createAccountBtn" className="btn btn-lg pinkBtn" onClick={this.handleSubmit}>Create Account</button>
                     <div id="terms-conditions-container">
                         <label>
-                            <input type="checkbox"/> I agree to the <a id="terms-conditions-link" href="#" target="_blank">Terms and Conditions</a>
+                             By signing up you agree to the <a id="terms-conditions-link" href="#" target="_blank">Terms and Conditions</a>
                         </label>
                     </div>
-                    <button id="createAccountBtn" className="btn btn-lg pinkBtn" onClick={this.handleSubmit}>Create Account</button>
                 </form>
                 <div id="log-in-button-container">
                     <p>Already have an account? <Link to={`/login`}><button id="log-in-btn-link" className="btn greenBtn">Log In</button></Link></p>

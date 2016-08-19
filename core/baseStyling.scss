@@ -1,5 +1,6 @@
 @import url(https://fonts.googleapis.com/css?family=Open+Sans:400,700);
 
+$interfaceBG: #F1F1F1;
 $primaryBlue: #3A4150;
 $primaryGreen: #56A17F;
 $buttonGreen: #5CD3B4;
@@ -11,6 +12,10 @@ body {
   z-index: 1;
   font-family: "Open Sans", sans-serif;
   color: #819AA0;
+}
+
+#render {
+  background: $interfaceBG;
 }
 
 input[type=password] {
