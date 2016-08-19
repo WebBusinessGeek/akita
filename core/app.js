@@ -3,7 +3,7 @@ import cors from "cors"
 import {BUILD_DIRECTORY} from "./../shared/constants/directory"
 import {LOCAL_ADDR} from "./../shared/constants/transport"
 import bodyParser from "body-parser"
-import User from "./../shared/db/models/User"
+import {loadDBTables, loadDBSeeds} from "./../shared/db/loader"
 
 
 /*instantiate the express app*/
@@ -23,7 +23,8 @@ APP.use(bodyParser.urlencoded({extended: true}))
 /*set static directory*/
 APP.use(express.static(BUILD_DIRECTORY))
 
-User.sync({})
+loadDBTables()
+loadDBSeeds()
 
 /*export the app instance*/
 export default APP
