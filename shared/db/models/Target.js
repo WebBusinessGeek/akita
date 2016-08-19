@@ -12,4 +12,5 @@ let Target = connection.define("Targets", {
 })
 
 
+
 export default Target

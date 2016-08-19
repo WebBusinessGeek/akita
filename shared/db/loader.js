@@ -3,7 +3,7 @@ import User from "./models/User"
 import Target from "./models/Target"
 
 /*seeds*/
-import {TargetSeeder} from "./seeds/TargetSeeder"
+import {seedTargetTable} from "./seeds/TargetSeeder"
 
 
 export let loadDBTables = () => {
@@ -12,6 +12,6 @@ export let loadDBTables = () => {
 }
 
 export let loadDBSeeds = () =>  {
-    TargetSeeder()
+    seedTargetTable()
 }
 
