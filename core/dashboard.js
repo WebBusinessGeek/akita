@@ -68,6 +68,8 @@ export default class Dashboard extends BasePage{
                     <img onClick={this.showOptions.bind(this)} id="view" className="center-block" src={require("./../shared/images/icons/eye.png")} />
                     <br/>
                     {this.state.optionsShowing ? this.renderOptions() : false}
+                </div>
+                <div className="container">
                     {this.props.children}
                 </div>
             </div>
