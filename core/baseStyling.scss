@@ -115,13 +115,9 @@ input[type=password]::-moz-placeholder {
   border: 1px solid $buttonGreenBorder;
 }
 
-.error-text {
-  color: red;
-}
-
 .user-form-main-btn {
   position: relative;
-  top: 30px;
+  top: 20px;
   width: 400px;
   height: 45px;
 }
@@ -143,5 +139,6 @@ input[type=password]::-moz-placeholder {
   margin-left: 5px;
 }
 
-
-
+.error-text {
+  color: red;
+}

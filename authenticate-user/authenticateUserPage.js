@@ -28,10 +28,10 @@ export default class AuthenticateUserPage extends BasePage {
                         <label htmlFor="passwordInput"></label>
                         <input type="password" className="form-control user-form-inputs" ref="passwordInput" id="passwordInput" placeholder="Password" />
                     </div>
-                    <button id="authenticateBtn" className="btn user-form-main-btn greenBtn" onClick={this.handleSubmit}>Sign in</button>
+                    <button id="authenticateBtn" className="btn user-form-main-btn greenBtn" onClick={this.handleSubmit}>Log In</button>
                 </form>
                 <div id="create-account-button-container" className="user-form-secondary-btn-container">
-                    <p>Don't have an account yet? <Link to={`/`}><button id="create-account-btn-link" className="btn user-form-secondary-btn pinkBtn">Create my account</button></Link></p>
+                    <p>Don't have an account? <Link to={`/`}><button id="create-account-btn-link" className="btn pinkBtn user-form-secondary-btn ">Sign Up</button></Link></p>
                 </div>
             </div>
         )
