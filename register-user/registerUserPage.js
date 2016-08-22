@@ -38,9 +38,6 @@ export default class RegisterUserPage extends BasePage {
             this.throwError(MISMATCH_PASSWORD_ERROR) : this.sendRegistrationRequest(email, password)
     }
 
-    throwError(error) {
-        this.setState({errorMessage : error})
-    }
 
     sendRegistrationRequest(email, password) {
         let successCB = (response) => {
@@ -59,13 +56,6 @@ export default class RegisterUserPage extends BasePage {
         Request.postRequest(REGISTER_USER_ENDPOINT, {email: email, password: password})
     }
 
-    renderErrorMessage() {
-        return(
-            <div>
-                <p className="error-text">{this.state.errorMessage}</p>
-            </div>
-        )
-    }
 
     render() {
         return(

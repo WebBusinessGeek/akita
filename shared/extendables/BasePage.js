@@ -19,7 +19,17 @@ export default class BasePage extends React.Component {
     createDashboardRoute(route) {
         return DASHBOARD_ROUTE + "/" + route
     }
-    
-    
+
+    throwError(error) {
+        this.setState({errorMessage : error})
+    }
+
+    renderErrorMessage() {
+        return(
+            <div>
+                <p className="error-text">{this.state.errorMessage}</p>
+            </div>
+        )
+    }
     
 }

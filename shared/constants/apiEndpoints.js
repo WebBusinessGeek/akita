@@ -12,5 +12,6 @@ let createEndpoint = (path) => {
 
 export const REGISTER_USER_ENDPOINT = createEndpoint("/register-user")
 export const TOKEN_VALIDATION_ENDPOINT = createEndpoint("/token-validate")
+export const AUTHENTICATE_USER_ENDPOINT = createEndpoint("/authenticate-user")
 
 
