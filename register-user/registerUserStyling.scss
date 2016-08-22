@@ -1,32 +1,5 @@
 @import "./../core/baseStyling.scss";
 
-
-#register-user-form-container {
-  background: #FFFFFF;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  border: 1px solid #CCCCCC;
-  width: 450px;
-  height: 560px;
-  margin-top: -300px;
-  margin-left: -250px;
-  padding: 20px;
-}
-
-.register-user-form-inputs {
-  margin-left: auto;
-  margin-right: auto;
-  width: 400px;
-  height: 50px;
-  border-radius: 0px;
-  margin-bottom: -5px;
-}
-
-.register-user-form-inputs:focus {
-  border: 1px solid $buttonGreenBorder;
-}
-
 #terms-conditions-container {
   position: relative;
   top: 42px;
@@ -44,26 +17,8 @@
   height: 45px;
 }
 
-#log-in-button-container {
-  position: relative;
-  top: 11%;
-  width: 308px;
-  margin-left: auto;
-  margin-right: auto;
-}
 
-#log-in-button-container p {
-  font-weight: 700;
-}
 
-#log-in-btn-link {
-  width: 120px;
-  margin-left: 5px;
-}
-
-.error-text {
-  color: red;
-}
 
 
 

@@ -69,32 +69,32 @@ export default class RegisterUserPage extends BasePage {
 
     render() {
         return(
-            <div id="register-user-form-container">
+            <div id="register-user-form-container" className="user-form-container">
                 <form id="register-user-form" className="text-center">
-                    <h2 id="register-user-form-heading" className="boldText">akiita</h2>
+                    <h2 id="register-user-form-heading" className="boldText">akita</h2>
                     <p id="register-user-form-blurb" className="greyText">Create your account below.</p>
                     <div>{this.state.errorMessage != null ? this.renderErrorMessage() : false }</div>
                     <div id="register-user-form-email-group" className="form-group">
                         <label htmlFor="emailInput"></label>
-                        <input type="email" className="form-control register-user-form-inputs" ref="emailInput" id="emailInput" placeholder="Email" />
+                        <input type="email" className="form-control user-form-inputs" ref="emailInput" id="emailInput" placeholder="Email" />
                     </div>
                     <div id="register-user-form-password-group" className="form-group">
                         <label htmlFor="passwordInput"></label>
-                        <input type="password" className="form-control register-user-form-inputs" ref="passwordInput" id="passwordInput" placeholder="Password" />
+                        <input type="password" className="form-control user-form-inputs" ref="passwordInput" id="passwordInput" placeholder="Password" />
                     </div>
                     <div id="register-user-form-confirm-password-group" className="form-group">
                         <label htmlFor="confirmPasswordInput"></label>
-                        <input type="password" className="form-control register-user-form-inputs" ref="conf_passwordInput" id="confirmPasswordInput" placeholder="Confirm It" />
+                        <input type="password" className="form-control user-form-inputs" ref="conf_passwordInput" id="confirmPasswordInput" placeholder="Confirm It" />
                     </div>
-                    <button id="createAccountBtn" className="btn btn-lg pinkBtn" onClick={this.handleSubmit}>Create Account</button>
+                    <button id="createAccountBtn" className="btn user-form-main-btn pinkBtn" onClick={this.handleSubmit}>Create Account</button>
                     <div id="terms-conditions-container">
                         <label>
                              By signing up you agree to the <a id="terms-conditions-link" href="#" target="_blank">Terms and Conditions</a>
                         </label>
                     </div>
                 </form>
-                <div id="log-in-button-container">
-                    <p>Already have an account? <Link to={`/login`}><button id="log-in-btn-link" className="btn greenBtn">Log In</button></Link></p>
+                <div id="log-in-button-container" className="user-form-secondary-btn-container">
+                    <p>Already have an account? <Link to={`/login`}><button id="log-in-btn-link" className="btn greenBtn user-form-secondary-btn">Log In</button></Link></p>
                 </div>
             </div>
         )
