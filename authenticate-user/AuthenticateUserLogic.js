@@ -29,6 +29,8 @@ export default class AuthenticateUserLogic {
         }
 
         attemptToAuthenticateUser(email, password, cb) {
+            this.checkIfUserExistsAsync(email)
+                .then((user) => {})
             /*check if user exists*/
             /*check if password matches*/
             /*authenticate and provide token*/
